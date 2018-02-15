@@ -6,13 +6,15 @@ def input_students
   #Then we get the name of the first person
   name = gets.chomp
   puts "Which cohort are they in?"
-  cohort = gets.chomp
+  cohort = gets.chomp.to_s
+  cohort = "november" if cohort.empty?
   while !name.empty? do
     students << {name: name, cohort: cohort}
     puts "Now we have #{students.count} students"
     name = gets.chomp
     puts "Which cohort are they in?"
-    cohort = gets.chomp
+    cohort = gets.chomp.to_s
+    cohort = :november if cohort.empty?
   end
   students
 end
