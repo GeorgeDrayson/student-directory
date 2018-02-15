@@ -5,10 +5,14 @@ def input_students
   students = []
   #Then we get the name of the first person
   name = gets.chomp
+  puts "Which cohort are they in?"
+  cohort = gets.chomp
   while !name.empty? do
-    students << {name: name, cohort: :november}
+    students << {name: name, cohort: cohort}
     puts "Now we have #{students.count} students"
     name = gets.chomp
+    puts "Which cohort are they in?"
+    cohort = gets.chomp
   end
   students
 end
@@ -18,7 +22,7 @@ def print_header
 end
 def print(students)
   students.each_with_index do |student, index|
-    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
   end
 end
 def print_footer(students)
