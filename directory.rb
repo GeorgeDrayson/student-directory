@@ -34,23 +34,6 @@ def print(students)
   end
 end
 
-def print_by_cohort(students)
-  cohorts = {}
-  students.each do |student|
-    cohort = student[:cohort]
-    name = student[:name]
-    if cohorts[cohort] == nil
-      cohorts[cohort] = [name]
-    else
-      cohorts[cohort].push(name)
-    end
-  end
-  cohorts.each do |key,value|
-    puts key.to_s.capitalize + " cohort"
-    value.each { |n| puts n}
-  end
-end
-
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
