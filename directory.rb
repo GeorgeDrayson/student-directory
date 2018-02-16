@@ -7,10 +7,14 @@ def input_students
   name = gets.chomp
   puts "Which cohort are they in?"
   cohort = gets.chomp.to_s
-  cohort = "november" if cohort.empty?
+  cohort = :november if cohort.empty?
   while !name.empty? do
     students << {name: name, cohort: cohort}
-    puts "Now we have #{students.count} students"
+    if students.count == 1
+      puts "Now we have 1 student"
+    else
+      puts "Now we have #{students.count} students"
+    end
     name = gets.chomp
     puts "Which cohort are they in?"
     cohort = gets.chomp.to_s
@@ -27,10 +31,27 @@ def print(students)
     puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
   end
 end
+def print_by_cohort(students)
+  cohorts = {}
+  students.each do |student|
+    cohort = student[:cohort]
+    name = student[:name]
+    if cohorts[cohort] == nil
+      cohorts[cohort] = [name]
+    else
+      cohorts[cohort].push(name)
+    end
+  end
+  cohorts.each do |key,value|
+    puts key.to_s.capitalize + " cohort"
+    value.each { |n| puts n}
+  end
+end
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 students = input_students
 print_header
 print(students)
+print_by_cohort(students)
 print_footer(students)
