@@ -11,20 +11,27 @@ def input_students
   cohort = :november if cohort.empty?
   while !name.empty? do
     @students << {name: name, cohort: cohort}
-    if @students.count == 1
-      puts "Now we have 1 student"
-    else
-      puts "Now we have #{@students.count} students"
-    end
+    puts @students.count == 1 ? "Now we have 1 student" : "Now we have #{@students.count} students"
     name = STDIN.gets.chomp
     puts "Which cohort are they in?"
     cohort = STDIN.gets.chomp.to_s
     cohort = :november if cohort.empty?
   end
+  puts "Succesffully inputted students"
+end
+
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
+  file.readlines.each do |line|
+    name, cohort = line.chomp.split(',')
+    @students << {name: name, cohort: cohort.to_sym}
+  end
+  file.close
+  puts "Successfully loaded students from students.csv"
 end
 
 def print_header
-  puts "The students of Villains Academy"
+  puts "The students of Makers Academy"
   puts "-------------"
 end
 
@@ -85,15 +92,7 @@ def save_students
     file.puts csv_line
   end
   file.close
-end
-
-def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
-  end
-  file.close
+  puts "Succesfully saved students to students.csv"
 end
 
 def try_load_students
